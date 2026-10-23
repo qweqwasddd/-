@@ -29,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     redirect('admin/projects.php');
 }
 
-// ?edit=ID — редактирование проекта, без параметра — добавление нового
 $edit = ['id' => 0, 'title' => '', 'location' => '', 'area' => '', 'year' => date('Y'), 'description' => '', 'image' => ''];
 if (isset($_GET['edit'])) {
     $stmt = db()->prepare('SELECT * FROM projects WHERE id = ?');

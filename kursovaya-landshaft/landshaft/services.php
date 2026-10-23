@@ -5,7 +5,6 @@ $title      = 'Услуги';
 $categories = db()->query('SELECT DISTINCT category FROM services ORDER BY category')->fetchAll(PDO::FETCH_COLUMN);
 $category   = $_GET['category'] ?? '';
 
-// Фильтр по категории: без параметра показываются все услуги
 if ($category !== '') {
     $stmt = db()->prepare('SELECT * FROM services WHERE category = ? ORDER BY price');
     $stmt->execute([$category]);

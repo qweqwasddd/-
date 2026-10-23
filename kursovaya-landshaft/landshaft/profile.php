@@ -27,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         flash('Данные сохранены');
     }
 
-    // Клиент может отменить только свой заказ и только пока он не взят в работу
     if ($action === 'cancel') {
         db()->prepare("UPDATE orders SET status = 'canceled' WHERE id = ? AND user_id = ? AND status = 'new'")
             ->execute([(int)$_POST['order_id'], $user['id']]);

@@ -1,4 +1,3 @@
-<?php // Карточка проекта портфолио. Ожидает переменную $project (строка из таблицы projects). ?>
 <figure class="project" data-lightbox
         data-title="<?= e($project['title']) ?>"
         data-text="<?= e($project['location'] . ' · ' . $project['area'] . ' м² · ' . $project['year'] . ' г. — ' . $project['description']) ?>">

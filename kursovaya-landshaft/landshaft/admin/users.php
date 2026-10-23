@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = (int)$_POST['id'];
 
     if ($_POST['action'] === 'delete') {
-        // Свою учётную запись удалить нельзя, иначе можно остаться без администратора
         if ($id === (int)$me['id']) {
             flash('Нельзя удалить свою учётную запись', 'error');
         } else {
@@ -21,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $phone = trim($_POST['phone']);
         $role  = $_POST['role'] === 'admin' ? 'admin' : 'user';
 
-        // E-mail должен быть уникальным (у другого пользователя такого быть не может)
         $stmt = db()->prepare('SELECT COUNT(*) FROM users WHERE email = ? AND id <> ?');
         $stmt->execute([$email, $id]);
 
@@ -46,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     redirect('admin/users.php');
 }
 
-// ?edit=ID — редактирование пользователя, без параметра — добавление нового
 $edit = ['id' => 0, 'name' => '', 'email' => '', 'phone' => '', 'role' => 'user'];
 if (isset($_GET['edit'])) {
     $stmt = db()->prepare('SELECT * FROM users WHERE id = ?');

@@ -22,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($stmt->fetchColumn() > 0) {
         $error = 'Пользователь с таким e-mail уже зарегистрирован';
     } else {
-        // В базе хранится не сам пароль, а его хеш
         $stmt = db()->prepare('INSERT INTO users (name, email, phone, password) VALUES (?, ?, ?, ?)');
         $stmt->execute([$name, $email, $phone, password_hash($password, PASSWORD_DEFAULT)]);
 

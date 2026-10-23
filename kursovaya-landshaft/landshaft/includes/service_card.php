@@ -1,4 +1,3 @@
-<?php // Карточка услуги. Ожидает переменную $service (строка из таблицы services). ?>
 <article class="card">
     <img class="card__img" src="<?= image_url($service['image']) ?>" alt="<?= e($service['title']) ?>">
     <div class="card__body">

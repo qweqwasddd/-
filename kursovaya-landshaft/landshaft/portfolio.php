@@ -20,7 +20,6 @@ require 'includes/header.php';
     </div>
 </section>
 
-<!-- Окно просмотра проекта, заполняется скриптом main.js -->
 <div class="lightbox" id="lightbox">
     <div class="lightbox__box">
         <button class="lightbox__close" type="button">×</button>

@@ -1,11 +1,7 @@
--- База данных сайта студии ландшафтного дизайна «Зелёный двор»
--- Импорт: phpMyAdmin → вкладка «Импорт» → выбрать этот файл → «Вперёд»
-
 DROP DATABASE IF EXISTS landshaft;
 CREATE DATABASE landshaft CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE landshaft;
 
--- Пользователи сайта (клиенты и администраторы)
 CREATE TABLE users (
     id         INT AUTO_INCREMENT PRIMARY KEY,
     name       VARCHAR(100) NOT NULL,
@@ -16,7 +12,6 @@ CREATE TABLE users (
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- Услуги студии
 CREATE TABLE services (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     title       VARCHAR(150) NOT NULL,
@@ -27,7 +22,6 @@ CREATE TABLE services (
     image       VARCHAR(255) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB;
 
--- Заказы клиентов на услуги
 CREATE TABLE orders (
     id         INT AUTO_INCREMENT PRIMARY KEY,
     user_id    INT NOT NULL,
@@ -41,7 +35,6 @@ CREATE TABLE orders (
     FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- Портфолио: выполненные проекты
 CREATE TABLE projects (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     title       VARCHAR(150) NOT NULL,
@@ -52,7 +45,6 @@ CREATE TABLE projects (
     image       VARCHAR(255) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB;
 
--- Обращения с формы «Контакты» (доступна без регистрации)
 CREATE TABLE messages (
     id         INT AUTO_INCREMENT PRIMARY KEY,
     name       VARCHAR(100) NOT NULL,
@@ -61,7 +53,6 @@ CREATE TABLE messages (
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- Тестовые учётные записи (пароль у обеих: 123456)
 INSERT INTO users (name, email, phone, password, role) VALUES
 ('Администратор', 'admin@zdvor.ru', '+7 (391) 200-10-10', '$2y$10$Yj/v8/6hnJrO.CBfyei0XOKT1IyWGfGLUJqCElGjqKPN.71yvoemK', 'admin'),
 ('Иван Петров',   'user@zdvor.ru',  '+7 (913) 555-12-34', '$2y$10$Yj/v8/6hnJrO.CBfyei0XOKT1IyWGfGLUJqCElGjqKPN.71yvoemK', 'user');

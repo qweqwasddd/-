@@ -1,10 +1,7 @@
 <?php
-// Общие функции: подключение к БД, авторизация, сообщения, загрузка файлов.
-// Подключается в начале каждой страницы.
 require_once __DIR__ . '/config.php';
 session_start();
 
-// Единственное подключение к БД на весь запрос
 function db(): PDO
 {
     static $pdo = null;
@@ -22,13 +19,11 @@ function db(): PDO
     return $pdo;
 }
 
-// Экранирование текста перед выводом в HTML (защита от XSS)
 function e($text): string
 {
     return htmlspecialchars((string)$text, ENT_QUOTES, 'UTF-8');
 }
 
-// Цена в формате «12 500 ₽»
 function money($value): string
 {
     return number_format((float)$value, 0, ',', ' ') . ' ₽';
@@ -40,7 +35,6 @@ function redirect(string $page): void
     exit;
 }
 
-// Текущий пользователь из сессии или null для гостя
 function current_user(): ?array
 {
     return $_SESSION['user'] ?? null;
@@ -66,7 +60,6 @@ function require_admin(): void
     }
 }
 
-// Одноразовое сообщение: записывается до перенаправления, показывается после
 function flash(string $text, string $type = 'success'): void
 {
     $_SESSION['flash'] = ['text' => $text, 'type' => $type];
@@ -79,8 +72,6 @@ function take_flash(): ?array
     return $flash;
 }
 
-// Сохраняет загруженную картинку в папку uploads и возвращает путь к ней.
-// Если файл не выбран или формат не подходит — возвращает $old (прежнее изображение).
 function upload_image(string $field, string $old): string
 {
     $file = $_FILES[$field] ?? null;
@@ -96,7 +87,6 @@ function upload_image(string $field, string $old): string
     return $name;
 }
 
-// Путь к картинке для атрибута src: стандартные лежат в assets/img, загруженные — в uploads
 function image_url(string $image): string
 {
     if ($image === '') {
@@ -105,7 +95,6 @@ function image_url(string $image): string
     return BASE_URL . (strpos($image, 'uploads/') === 0 ? $image : 'assets/img/' . $image);
 }
 
-// Подписи статусов заказа (цвет задаётся в CSS классом status-<ключ>)
 const ORDER_STATUSES = [
     'new'      => 'Новый',
     'in_work'  => 'В работе',

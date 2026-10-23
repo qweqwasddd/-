@@ -2,7 +2,6 @@
 require_once '../includes/functions.php';
 require_admin();
 
-// Смена статуса заказа
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset(ORDER_STATUSES[$_POST['status']])) {
     db()->prepare('UPDATE orders SET status = ? WHERE id = ?')->execute([$_POST['status'], (int)$_POST['id']]);
     flash('Статус заказа №' . (int)$_POST['id'] . ' изменён');

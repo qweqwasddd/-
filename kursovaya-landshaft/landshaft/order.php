@@ -16,7 +16,6 @@ $user  = current_user();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_login();
     $quantity = max(1, (int)$_POST['quantity']);
-    // Стоимость считается на сервере: значению из браузера доверять нельзя
     $total    = $quantity * $service['price'];
 
     $stmt = db()->prepare('INSERT INTO orders (user_id, service_id, quantity, total, comment) VALUES (?, ?, ?, ?, ?)');

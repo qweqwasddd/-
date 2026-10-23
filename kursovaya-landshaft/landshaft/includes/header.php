@@ -1,10 +1,8 @@
 <?php
-// Шапка сайта. Перед подключением страница задаёт переменную $title.
 $user    = current_user();
 $current = basename($_SERVER['SCRIPT_NAME']);
 $inAdmin = strpos($_SERVER['SCRIPT_NAME'], '/admin/') !== false;
 
-// Пункты главного меню: файл => подпись
 $menu = [
     'index.php'     => 'Главная',
     'services.php'  => 'Услуги',

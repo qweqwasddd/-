@@ -6,7 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = (int)$_POST['id'];
 
     if ($_POST['action'] === 'delete') {
-        // Заказы этой услуги удалятся автоматически (ON DELETE CASCADE)
         db()->prepare('DELETE FROM services WHERE id = ?')->execute([$id]);
         flash('Услуга удалена');
     } else {
@@ -30,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     redirect('admin/services.php');
 }
 
-// Если в адресе есть ?edit=ID — форма заполняется данными этой услуги, иначе форма пустая (добавление)
 $edit = ['id' => 0, 'title' => '', 'category' => '', 'description' => '', 'price' => '', 'unit' => 'м²', 'image' => ''];
 if (isset($_GET['edit'])) {
     $stmt = db()->prepare('SELECT * FROM services WHERE id = ?');

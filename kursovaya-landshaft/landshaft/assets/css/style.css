@@ -15,10 +15,14 @@
 
 body {
     margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     font: 17px/1.55 var(--font-text);
     color: var(--text);
     background: #fff;
 }
+main { flex: 1; }
 
 h1, h2, h3 { font-family: var(--font-title); font-weight: 700; line-height: 1.25; margin: 0 0 .6em; }
 h1 { font-size: 2.3rem; }
@@ -31,7 +35,8 @@ img { max-width: 100%; display: block; }
 .container { width: min(1140px, 100% - 32px); margin: 0 auto; }
 .section { padding: 56px 0; }
 .section--light { background: var(--bg-light); }
-.section__head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 24px; }
+.section__head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 24px; }
+.section__head a { white-space: nowrap; }
 .section__head h2 { margin: 0; }
 .empty { color: var(--muted); }
 
@@ -87,8 +92,10 @@ img { max-width: 100%; display: block; }
 .feature { border-top: 3px solid var(--green); padding-top: 14px; }
 .feature p { color: var(--muted); margin: 0; }
 
-.steps { margin: 16px 0 0; padding-left: 22px; max-width: 760px; }
-.steps li { margin-bottom: 10px; }
+.steps { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; counter-reset: step; }
+.steps li { counter-increment: step; color: var(--muted); }
+.steps li::before { content: counter(step); display: block; font: 700 2.4rem/1 var(--font-title); color: var(--green); margin-bottom: 10px; }
+.steps strong { display: block; color: var(--text); font: 700 1.15rem var(--font-title); margin-bottom: 4px; }
 
 .cta { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 8px; padding: 28px 32px; }
 .cta h2 { margin-bottom: 6px; }
@@ -145,9 +152,10 @@ img { max-width: 100%; display: block; }
 .total { border-top: 1px solid var(--line); padding-top: 12px; }
 .total strong { font-size: 1.3rem; }
 
-.contacts { display: grid; gap: 18px; align-content: start; }
-.contacts strong { display: block; color: var(--muted); font-weight: 400; font-size: .92rem; }
-.contacts p { font-size: 1.1rem; margin: 0; }
+.contacts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-content: start; }
+.contacts div { border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; }
+.contacts strong { display: block; color: var(--muted); font-weight: 400; font-size: .92rem; margin-bottom: 4px; }
+.contacts p { font: 700 1.1rem var(--font-title); color: var(--green-dark); margin: 0; }
 
 .profile { display: grid; grid-template-columns: 340px 1fr; gap: 36px; align-items: start; }
 .order-row { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
@@ -215,7 +223,13 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 900px) {
     .hero__inner, .two-columns, .profile, .admin-layout, .footer__inner { grid-template-columns: 1fr; }
-    .grid, .features, .stats { grid-template-columns: 1fr 1fr; }
+    .grid, .features, .stats, .steps { grid-template-columns: 1fr 1fr; }
+    .grid > :last-child:nth-child(odd) { grid-column: span 2; }
+    .grid > .card:last-child:nth-child(odd) { flex-direction: row; }
+    .grid > .card:last-child:nth-child(odd) > a { flex: 0 0 50%; }
+    .grid > .card:last-child:nth-child(odd) .card__img { height: 100%; }
+    .grid > .project:last-child:nth-child(odd) img { aspect-ratio: 3 / 1.2; }
+    .hero__img { aspect-ratio: 16 / 9; }
     .table { display: block; overflow-x: auto; }
 
     .header__inner { gap: 16px; }
@@ -233,7 +247,10 @@ img { max-width: 100%; display: block; }
     h1 { font-size: 1.8rem; }
     .header__phone { display: none; }
     .burger { margin-left: auto; }
-    .grid, .features, .stats { grid-template-columns: 1fr; }
+    .grid, .features, .stats, .steps, .contacts { grid-template-columns: 1fr; }
+    .grid > :last-child:nth-child(odd) { grid-column: auto; }
+    .grid > .card:last-child:nth-child(odd) { flex-direction: column; }
+    .grid > .project:last-child:nth-child(odd) img { aspect-ratio: 3 / 2; }
     .form__row { grid-template-columns: 1fr; }
     .cta { padding: 22px; }
 }

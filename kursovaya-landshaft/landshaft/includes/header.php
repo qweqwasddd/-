@@ -25,30 +25,29 @@ $menu = [
     <div class="container header__inner">
         <a class="logo" href="<?= BASE_URL ?>index.php"><?= SITE_NAME ?><small>ландшафтный дизайн</small></a>
 
-        <a class="header__phone" href="tel:12345678910">1 (234) 567 89 10</a>
-
         <button class="burger" type="button">Меню</button>
 
         <nav class="nav">
-            <?php foreach ($menu as $file => $label): ?>
-                <a href="<?= BASE_URL . $file ?>"
-                   class="<?= !$inAdmin && $current === $file ? 'active' : '' ?>"><?= $label ?></a>
-            <?php endforeach; ?>
-
-            <span class="nav__sep"></span>
-
-            <?php if ($user): ?>
+            <div class="nav__menu">
+                <?php foreach ($menu as $file => $label): ?>
+                    <a href="<?= BASE_URL . $file ?>"
+                       class="<?= !$inAdmin && $current === $file ? 'active' : '' ?>"><?= $label ?></a>
+                <?php endforeach; ?>
                 <?php if (is_admin()): ?>
                     <a href="<?= BASE_URL ?>admin/index.php" class="<?= $inAdmin ? 'active' : '' ?>">Админ-панель</a>
                 <?php endif; ?>
-                <a href="<?= BASE_URL ?>profile.php" class="<?= $current === 'profile.php' ? 'active' : '' ?>">
-                    <?= e($user['name']) ?>
-                </a>
-                <a href="<?= BASE_URL ?>logout.php">Выйти</a>
-            <?php else: ?>
-                <a href="<?= BASE_URL ?>login.php">Войти</a>
-                <a href="<?= BASE_URL ?>register.php" class="btn btn--small">Регистрация</a>
-            <?php endif; ?>
+            </div>
+
+            <div class="nav__actions">
+                <a class="header__phone" href="tel:12345678910">1 (234) 567 89 10</a>
+                <?php if ($user): ?>
+                    <a href="<?= BASE_URL ?>profile.php" class="<?= $current === 'profile.php' ? 'active' : '' ?>"><?= e($user['name']) ?></a>
+                    <a href="<?= BASE_URL ?>logout.php">Выйти</a>
+                <?php else: ?>
+                    <a href="<?= BASE_URL ?>login.php">Войти</a>
+                    <a href="<?= BASE_URL ?>register.php" class="btn btn--small">Регистрация</a>
+                <?php endif; ?>
+            </div>
         </nav>
     </div>
 </header>

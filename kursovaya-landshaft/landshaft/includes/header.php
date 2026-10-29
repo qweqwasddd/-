@@ -17,17 +17,15 @@ $menu = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($title) ?> — <?= SITE_NAME ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
 </head>
 <body>
 <header class="header">
     <div class="container header__inner">
-        <a class="logo" href="<?= BASE_URL ?>index.php">
-            <span class="logo__icon">❦</span> <?= SITE_NAME ?>
-        </a>
+        <a class="logo" href="<?= BASE_URL ?>index.php"><?= SITE_NAME ?><span class="logo__dot"></span></a>
 
-        <button class="burger" type="button" aria-label="Меню">☰</button>
+        <button class="burger" type="button">Меню</button>
 
         <nav class="nav">
             <?php foreach ($menu as $file => $label): ?>
@@ -42,12 +40,12 @@ $menu = [
                     <a href="<?= BASE_URL ?>admin/index.php" class="<?= $inAdmin ? 'active' : '' ?>">Админ-панель</a>
                 <?php endif; ?>
                 <a href="<?= BASE_URL ?>profile.php" class="<?= $current === 'profile.php' ? 'active' : '' ?>">
-                    👤 <?= e($user['name']) ?>
+                    <?= e($user['name']) ?>
                 </a>
                 <a href="<?= BASE_URL ?>logout.php">Выйти</a>
             <?php else: ?>
                 <a href="<?= BASE_URL ?>login.php">Войти</a>
-                <a href="<?= BASE_URL ?>register.php" class="btn btn--small">Регистрация</a>
+                <a href="<?= BASE_URL ?>register.php" class="btn btn--small btn--dark">Регистрация</a>
             <?php endif; ?>
         </nav>
     </div>

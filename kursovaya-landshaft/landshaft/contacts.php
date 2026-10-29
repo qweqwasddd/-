@@ -31,10 +31,10 @@ require 'includes/header.php';
 
 <section class="section container two-columns">
     <div class="contacts">
-        <div><span>📍</span><p><strong>Адрес</strong>г. Красноярск, ул. Садовая, 12</p></div>
-        <div><span>📞</span><p><strong>Телефон</strong>+7 (391) 200-10-10</p></div>
-        <div><span>✉️</span><p><strong>Почта</strong>info@zdvor.ru</p></div>
-        <div><span>🕘</span><p><strong>Режим работы</strong>Пн–Сб, 9:00–19:00</p></div>
+        <div><span class="eyebrow">Адрес</span><p>г. Красноярск, ул. Садовая, 12</p></div>
+        <div><span class="eyebrow">Телефон</span><p>+7 (391) 200-10-10</p></div>
+        <div><span class="eyebrow">Почта</span><p>info@zdvor.ru</p></div>
+        <div><span class="eyebrow">Режим работы</span><p>Пн–Сб, 9:00–19:00</p></div>
     </div>
 
     <form class="form" method="post">

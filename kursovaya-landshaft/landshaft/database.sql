@@ -54,7 +54,7 @@ CREATE TABLE messages (
 ) ENGINE=InnoDB;
 
 INSERT INTO users (name, email, phone, password, role) VALUES
-('Администратор', 'admin@zdvor.ru', '+7 (391) 200-10-10', '$2y$10$Yj/v8/6hnJrO.CBfyei0XOKT1IyWGfGLUJqCElGjqKPN.71yvoemK', 'admin'),
+('Администратор', 'admin@zdvor.ru', '1 (234) 567 89 10', '$2y$10$Yj/v8/6hnJrO.CBfyei0XOKT1IyWGfGLUJqCElGjqKPN.71yvoemK', 'admin'),
 ('Иван Петров',   'user@zdvor.ru',  '+7 (913) 555-12-34', '$2y$10$Yj/v8/6hnJrO.CBfyei0XOKT1IyWGfGLUJqCElGjqKPN.71yvoemK', 'user');
 
 INSERT INTO services (title, category, description, price, unit, image) VALUES

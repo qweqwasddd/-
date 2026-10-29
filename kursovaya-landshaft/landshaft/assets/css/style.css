@@ -46,6 +46,7 @@ img { max-width: 100%; display: block; }
     text-decoration: none;
     cursor: pointer;
 }
+.btn { transition: background .2s, border-color .2s, color .2s; }
 .btn:hover { background: var(--green-dark); border-color: var(--green-dark); }
 .btn--small { padding: 7px 14px; font-size: .92rem; }
 .btn--outline { background: #fff; color: var(--green); }
@@ -94,8 +95,9 @@ img { max-width: 100%; display: block; }
 
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 
-.card { background: #fff; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
-.card__img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform .25s, box-shadow .25s; }
+.card > a { display: block; overflow: hidden; }
+.card__img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; transition: transform .4s; }
 .card__body { padding: 16px 18px 18px; display: flex; flex-direction: column; flex: 1; }
 .card__body p { color: var(--muted); font-size: .95rem; flex: 1; }
 .card__category { font-size: .85rem; color: var(--muted); margin-bottom: 4px; }
@@ -109,8 +111,7 @@ img { max-width: 100%; display: block; }
 .filters a.active { background: var(--green); border-color: var(--green); color: #fff; }
 
 .project { margin: 0; cursor: pointer; }
-.project img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
-.project:hover img { opacity: .9; }
+.project img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 8px; margin-bottom: 10px; transition: transform .25s; }
 .project figcaption strong { display: block; }
 .project figcaption span { color: var(--muted); font-size: .92rem; }
 
@@ -188,6 +189,17 @@ img { max-width: 100%; display: block; }
 .footer a { display: block; color: #dfe8de; text-decoration: none; margin-bottom: 4px; }
 .footer a:hover { color: #fff; text-decoration: underline; }
 .footer__copy { border-top: 1px solid rgba(255, 255, 255, .15); margin-top: 28px; padding-top: 16px; font-size: .9rem; color: #b8c7b6; }
+
+@keyframes fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: no-preference) {
+    .hero__text, .hero__img { animation: fade-up .7s ease both; }
+    .hero__img { animation-delay: .15s; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0, 0, 0, .08); }
+    .card:hover .card__img { transform: scale(1.04); }
+    .project:hover img { transform: translateY(-4px); }
+    .lightbox.open .lightbox__box { animation: fade-up .3s ease both; }
+}
 
 @media (max-width: 900px) {
     .hero__inner, .two-columns, .profile, .admin-layout, .footer__inner { grid-template-columns: 1fr; }

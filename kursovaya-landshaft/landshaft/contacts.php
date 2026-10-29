@@ -32,8 +32,8 @@ require 'includes/header.php';
 <section class="section container two-columns">
     <div class="contacts">
         <div><strong>Адрес</strong><p>г. Красноярск, ул. Садовая, 12</p></div>
-        <div><strong>Телефон</strong><p>+7 (391) 200-10-10</p></div>
-        <div><strong>Почта</strong><p>info@zdvor.ru</p></div>
+        <div><strong>Телефон</strong><p>1 (234) 567 89 10</p></div>
+        <div><strong>Почта</strong><p>darya@zeloniydvor.ru</p></div>
         <div><strong>Режим работы</strong><p>Пн–Сб, 9:00–19:00</p></div>
     </div>
 

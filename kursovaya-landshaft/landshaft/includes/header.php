@@ -25,7 +25,7 @@ $menu = [
     <div class="container header__inner">
         <a class="logo" href="<?= BASE_URL ?>index.php"><?= SITE_NAME ?><small>ландшафтный дизайн</small></a>
 
-        <a class="header__phone" href="tel:+73912001010">+7 (391) 200-10-10</a>
+        <a class="header__phone" href="tel:12345678910">1 (234) 567 89 10</a>
 
         <button class="burger" type="button">Меню</button>
 

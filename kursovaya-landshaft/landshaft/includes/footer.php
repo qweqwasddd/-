@@ -14,7 +14,7 @@
         </div>
         <div>
             <h4>Контакты</h4>
-            <p>г. Красноярск, ул. Садовая, 12<br>+7 (391) 200-10-10<br>info@zdvor.ru</p>
+            <p>г. Красноярск, ул. Садовая, 12<br>1 (234) 567 89 10<br>darya@zeloniydvor.ru</p>
         </div>
     </div>
     <div class="container footer__copy">© <?= date('Y') ?> <?= SITE_NAME ?></div>

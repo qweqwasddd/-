@@ -5,47 +5,61 @@ $title    = 'Главная';
 $services = db()->query('SELECT * FROM services ORDER BY id LIMIT 3')->fetchAll();
 $projects = db()->query('SELECT * FROM projects ORDER BY year DESC, id DESC LIMIT 3')->fetchAll();
 $stats    = [
-    'проектов в портфолио' => db()->query('SELECT COUNT(*) FROM projects')->fetchColumn(),
-    'видов услуг'          => db()->query('SELECT COUNT(*) FROM services')->fetchColumn(),
-    'лет работы'           => date('Y') - 2015,
+    'проектов' => db()->query('SELECT COUNT(*) FROM projects')->fetchColumn(),
+    'услуг'    => db()->query('SELECT COUNT(*) FROM services')->fetchColumn(),
+    'лет'      => date('Y') - 2015,
 ];
+$ticker = ['Проектирование', 'Озеленение', 'Газоны', 'Садовые дорожки', 'Водоёмы', 'Освещение', 'Уход за садом'];
 
 require 'includes/header.php';
 ?>
 
 <section class="container hero">
-    <div class="hero__media" style="background-image: url('<?= BASE_URL ?>assets/img/hero.svg')">
+    <div class="hero__text">
         <span class="eyebrow eyebrow--light">Студия ландшафтного дизайна · Красноярск</span>
-        <h1>Создаём сады, в&nbsp;которых хочется жить</h1>
-        <div class="hero__bottom">
-            <p>Проектирование, озеленение и благоустройство частных участков. От идеи до первого урожая.</p>
-            <div class="hero__buttons">
-                <a class="btn btn--accent" href="services.php">Выбрать услугу</a>
-                <a class="btn btn--ghost" href="portfolio.php">Портфолио</a>
-            </div>
+        <h1>Создаём <em>сады,</em> в&nbsp;которых хочется жить</h1>
+        <p>Проектирование, озеленение и благоустройство частных участков. От идеи до первого урожая.</p>
+        <div class="hero__buttons">
+            <a class="btn btn--accent" href="services.php">Выбрать услугу</a>
+            <a class="btn btn--ghost" href="portfolio.php">Портфолио</a>
+        </div>
+        <div class="hero__stats">
+            <?php foreach ($stats as $label => $value): ?>
+                <div><strong data-count="<?= $value ?>"><?= $value ?></strong><span><?= $label ?></span></div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <div class="hero__media" style="background-image: url('<?= BASE_URL ?>assets/img/hero.svg')">
+        <div class="badge">
+            <svg viewBox="0 0 200 200">
+                <defs><path id="circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+                <text><textPath href="#circle">сады под ключ · с 2015 года · гарантия 2 года ·</textPath></text>
+            </svg>
+            <span>✿</span>
         </div>
     </div>
 </section>
 
-<section class="container stats">
-    <?php foreach ($stats as $label => $value): ?>
-        <div class="stats__item">
-            <strong><?= $value ?></strong>
-            <span><?= $label ?></span>
+<div class="ticker-wrap">
+    <div class="ticker">
+        <div class="ticker__track">
+            <?php for ($i = 0; $i < 2; $i++): ?>
+                <?php foreach ($ticker as $word): ?><span><?= $word ?></span><?php endforeach; ?>
+            <?php endfor; ?>
         </div>
-    <?php endforeach; ?>
-</section>
+    </div>
+</div>
 
 <section class="section container">
     <div class="section-head">
         <span class="eyebrow">Почему мы</span>
         <h2>Делаем сад под ваш участок, климат и образ жизни</h2>
     </div>
-    <div class="features">
-        <div class="feature"><span class="feature__num">01</span><h3>Растения для Сибири</h3><p>Подбираем только зимостойкие сорта, которые переживут морозы.</p></div>
-        <div class="feature"><span class="feature__num">02</span><h3>Проект до мелочей</h3><p>Генплан, дендроплан и 3D-модель — видите сад до начала работ.</p></div>
-        <div class="feature"><span class="feature__num">03</span><h3>Один договор</h3><p>Проектируем, строим и ухаживаем сами, без субподрядчиков.</p></div>
-        <div class="feature"><span class="feature__num">04</span><h3>Гарантия 2 года</h3><p>Бесплатно заменим растение, если оно не прижилось.</p></div>
+    <div class="bento">
+        <div class="tile tile--forest"><span class="tile__num">01</span><h3>Растения для Сибири</h3><p>Подбираем только зимостойкие сорта, которые переживут морозы.</p></div>
+        <div class="tile tile--lime"><span class="tile__num">02</span><h3>Проект до мелочей</h3><p>Генплан, дендроплан и 3D-модель — видите сад до начала работ.</p></div>
+        <div class="tile tile--peach"><span class="tile__num">03</span><h3>Один договор</h3><p>Проектируем, строим и ухаживаем сами, без субподрядчиков.</p></div>
+        <div class="tile tile--white"><span class="tile__num">04</span><h3>Гарантия 2 года</h3><p>Бесплатно заменим растение, если оно не прижилось.</p></div>
     </div>
 </section>
 
@@ -85,15 +99,17 @@ require 'includes/header.php';
         </div>
         <a class="link-arrow" href="portfolio.php">Все проекты</a>
     </div>
-    <div class="grid">
+    <div class="gallery">
         <?php foreach ($projects as $project) require 'includes/project_card.php'; ?>
     </div>
 </section>
 
 <section class="container cta">
-    <span class="eyebrow">Консультация</span>
-    <h2>Расскажите о своём участке —<br>перезвоним и бесплатно проконсультируем</h2>
-    <a class="btn btn--accent" href="contacts.php">Получить консультацию</a>
+    <div>
+        <span class="eyebrow">Консультация</span>
+        <h2>Расскажите о своём участке — перезвоним и бесплатно проконсультируем</h2>
+    </div>
+    <a class="btn btn--dark btn--big" href="contacts.php">Получить консультацию</a>
 </section>
 
 <?php require 'includes/footer.php'; ?>

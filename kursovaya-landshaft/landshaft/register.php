@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = db()->prepare('INSERT INTO users (name, email, phone, password) VALUES (?, ?, ?, ?)');
         $stmt->execute([$name, $email, $phone, password_hash($password, PASSWORD_DEFAULT)]);
 
+        session_regenerate_id(true);
         $_SESSION['user'] = ['id' => db()->lastInsertId(), 'name' => $name, 'email' => $email, 'phone' => $phone, 'role' => 'user'];
         flash('Добро пожаловать, ' . $name . '!');
         redirect('profile.php');
@@ -36,6 +37,7 @@ require 'includes/header.php';
 
 <section class="section container auth">
     <form class="form" method="post">
+        <?= csrf_field() ?>
         <h1>Регистрация</h1>
         <?php if ($error): ?><p class="form__error"><?= e($error) ?></p><?php endif; ?>
         <label>Имя <input type="text" name="name" required value="<?= e($_POST['name'] ?? '') ?>"></label>

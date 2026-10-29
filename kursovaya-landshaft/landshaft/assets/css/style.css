@@ -34,6 +34,7 @@ h3 { font-size: 1.15rem; }
 p { margin: 0 0 1em; }
 a { color: var(--green); }
 img { max-width: 100%; display: block; }
+:focus-visible { outline: 3px solid var(--clay); outline-offset: 3px; border-radius: 4px; }
 
 .container { width: min(1140px, 100% - 32px); margin: 0 auto; }
 .section { padding: 64px 0; }
@@ -208,7 +209,7 @@ img { max-width: 100%; display: block; }
 .footer a:hover { color: var(--clay); }
 
 @media (min-width: 901px) {
-    .container { width: min(1140px, 100% - 340px); }
+    .container { --w: min(1140px, 100% - 254px); width: var(--w); margin-left: calc((100% - 190px - var(--w)) / 2); }
     .nav { justify-content: flex-end; }
     .nav__menu {
         position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 20;

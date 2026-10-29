@@ -1,6 +1,16 @@
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav');
-burger.addEventListener('click', () => nav.classList.toggle('open'));
+burger.addEventListener('click', () => {
+    nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', nav.classList.contains('open'));
+});
+
+document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    nav.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.querySelector('.lightbox')?.classList.remove('open');
+});
 
 const flash = document.querySelector('.flash');
 if (flash) {
@@ -33,6 +43,10 @@ if (quantity) {
 const lightbox = document.getElementById('lightbox');
 if (lightbox) {
     document.querySelectorAll('[data-lightbox]').forEach(project => {
+        project.tabIndex = 0;
+        project.addEventListener('keydown', event => {
+            if (event.key === 'Enter') project.click();
+        });
         project.addEventListener('click', () => {
             lightbox.querySelector('img').src = project.querySelector('img').src;
             lightbox.querySelector('h3').textContent = project.dataset.title;

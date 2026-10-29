@@ -39,6 +39,7 @@ require 'includes/header.php';
 
     <?php if ($user): ?>
         <form class="form" method="post">
+            <?= csrf_field() ?>
             <h2>Оформление заказа</h2>
             <label>Количество, <?= e($service['unit']) ?>
                 <input type="number" name="quantity" min="1" value="1" required

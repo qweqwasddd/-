@@ -39,6 +39,7 @@ require 'nav.php';
                 <td><?= e($message['text']) ?></td>
                 <td>
                     <form method="post" data-confirm="Удалить обращение?">
+                        <?= csrf_field() ?>
                         <input type="hidden" name="id" value="<?= $message['id'] ?>">
                         <button class="link-button link-button--danger">Удалить</button>
                     </form>

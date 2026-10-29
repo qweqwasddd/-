@@ -64,6 +64,7 @@ require 'nav.php';
 
 <section class="section container admin-layout">
     <form class="form" method="post">
+        <?= csrf_field() ?>
         <h2><?= $edit['id'] ? 'Редактирование пользователя' : 'Новый пользователь' ?></h2>
         <input type="hidden" name="id" value="<?= $edit['id'] ?>">
         <label>Имя <input type="text" name="name" required value="<?= e($edit['name']) ?>"></label>
@@ -94,6 +95,7 @@ require 'nav.php';
                     <a href="?edit=<?= $u['id'] ?>">Изменить</a>
                     <?php if ($u['id'] != $me['id']): ?>
                         <form method="post" data-confirm="Удалить пользователя и все его заказы?">
+                            <?= csrf_field() ?>
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="id" value="<?= $u['id'] ?>">
                             <button class="link-button link-button--danger">Удалить</button>

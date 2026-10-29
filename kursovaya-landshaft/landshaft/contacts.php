@@ -38,6 +38,7 @@ require 'includes/header.php';
     </div>
 
     <form class="form" method="post">
+        <?= csrf_field() ?>
         <h2>Бесплатная консультация</h2>
         <label>Ваше имя
             <input type="text" name="name" required value="<?= e($user['name'] ?? '') ?>">

@@ -55,6 +55,7 @@ require 'includes/header.php';
 
 <section class="section container profile">
     <form class="form" method="post">
+        <?= csrf_field() ?>
         <h2>Мои данные</h2>
         <input type="hidden" name="action" value="update">
         <label>Имя <input type="text" name="name" required value="<?= e($user['name']) ?>"></label>
@@ -80,6 +81,7 @@ require 'includes/header.php';
                     <span class="status status-<?= $order['status'] ?>"><?= ORDER_STATUSES[$order['status']] ?></span>
                     <?php if ($order['status'] === 'new'): ?>
                         <form method="post" data-confirm="Отменить заказ?">
+                            <?= csrf_field() ?>
                             <input type="hidden" name="action" value="cancel">
                             <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
                             <button class="link-button" type="submit">Отменить</button>

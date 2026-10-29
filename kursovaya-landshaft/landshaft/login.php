@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $found = $stmt->fetch();
 
     if ($found && password_verify($_POST['password'], $found['password'])) {
+        session_regenerate_id(true);
         unset($found['password']);
         $_SESSION['user'] = $found;
         redirect($found['role'] === 'admin' ? 'admin/index.php' : 'profile.php');
@@ -22,6 +23,7 @@ require 'includes/header.php';
 
 <section class="section container auth">
     <form class="form" method="post">
+        <?= csrf_field() ?>
         <h1>Вход</h1>
         <?php if ($error): ?><p class="form__error"><?= e($error) ?></p><?php endif; ?>
         <label>E-mail <input type="email" name="email" required value="<?= e($_POST['email'] ?? '') ?>"></label>

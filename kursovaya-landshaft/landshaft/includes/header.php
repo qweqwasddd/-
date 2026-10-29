@@ -15,7 +15,9 @@ $menu = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Студия ландшафтного дизайна «Зелёный двор» в Красноярске: проектирование, озеленение и благоустройство частных участков.">
     <title><?= e($title) ?> — <?= SITE_NAME ?></title>
+    <link rel="icon" href="<?= BASE_URL ?>assets/img/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css?v=<?= filemtime(__DIR__ . '/../assets/css/style.css') ?>">
@@ -25,14 +27,14 @@ $menu = [
     <div class="container header__inner">
         <a class="logo" href="<?= BASE_URL ?>index.php"><?= SITE_NAME ?><small>ландшафтный дизайн</small></a>
 
-        <button class="burger" type="button">Меню</button>
+        <button class="burger" type="button" aria-expanded="false">Меню</button>
 
         <nav class="nav">
             <div class="nav__menu">
                 <span class="nav__caption">Разделы</span>
                 <?php foreach ($menu as $file => $label): ?>
                     <a href="<?= BASE_URL . $file ?>"
-                       class="<?= !$inAdmin && $current === $file ? 'active' : '' ?>"><span><?= $label ?></span><i class="nav__dash"></i></a>
+                       class="<?= !$inAdmin && $current === $file ? 'active' : '' ?>"<?= !$inAdmin && $current === $file ? ' aria-current="page"' : '' ?>><span><?= $label ?></span><i class="nav__dash"></i></a>
                 <?php endforeach; ?>
                 <?php if (is_admin()): ?>
                     <a href="<?= BASE_URL ?>admin/index.php" class="<?= $inAdmin ? 'active' : '' ?>"><span>Админ-панель</span><i class="nav__dash"></i></a>

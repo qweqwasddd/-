@@ -36,6 +36,7 @@ require 'nav.php';
                 <td><?= e($order['comment']) ?></td>
                 <td>
                     <form method="post">
+                        <?= csrf_field() ?>
                         <input type="hidden" name="id" value="<?= $order['id'] ?>">
                         <select name="status" class="status status-<?= $order['status'] ?>" data-autosubmit>
                             <?php foreach (ORDER_STATUSES as $key => $label): ?>

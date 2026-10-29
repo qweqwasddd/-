@@ -1,6 +1,6 @@
 <article class="card">
     <a href="<?= BASE_URL ?>order.php?id=<?= $service['id'] ?>">
-        <img class="card__img" src="<?= image_url($service['image']) ?>" alt="<?= e($service['title']) ?>">
+        <img class="card__img" loading="lazy" src="<?= image_url($service['image']) ?>" alt="<?= e($service['title']) ?>">
     </a>
     <div class="card__body">
         <span class="card__category"><?= e($service['category']) ?></span>

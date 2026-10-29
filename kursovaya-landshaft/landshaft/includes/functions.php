@@ -101,3 +101,21 @@ const ORDER_STATUSES = [
     'done'     => 'Выполнен',
     'canceled' => 'Отменён',
 ];
+
+function csrf_token(): string
+{
+    if (empty($_SESSION['csrf'])) {
+        $_SESSION['csrf'] = bin2hex(random_bytes(16));
+    }
+    return $_SESSION['csrf'];
+}
+
+function csrf_field(): string
+{
+    return '<input type="hidden" name="csrf" value="' . csrf_token() . '">';
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !hash_equals(csrf_token(), $_POST['csrf'] ?? '')) {
+    http_response_code(403);
+    exit('Форма устарела. Вернитесь назад, обновите страницу и отправьте её ещё раз.');
+}

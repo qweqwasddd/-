@@ -46,6 +46,7 @@ require 'nav.php';
 
 <section class="section container admin-layout">
     <form class="form" method="post" enctype="multipart/form-data">
+        <?= csrf_field() ?>
         <h2><?= $edit['id'] ? 'Редактирование услуги' : 'Новая услуга' ?></h2>
         <input type="hidden" name="id" value="<?= $edit['id'] ?>">
         <input type="hidden" name="old_image" value="<?= e($edit['image']) ?>">
@@ -77,6 +78,7 @@ require 'nav.php';
                 <td class="table__actions">
                     <a href="?edit=<?= $service['id'] ?>">Изменить</a>
                     <form method="post" data-confirm="Удалить услугу и все её заказы?">
+                        <?= csrf_field() ?>
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="id" value="<?= $service['id'] ?>">
                         <button class="link-button link-button--danger">Удалить</button>

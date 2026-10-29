@@ -45,6 +45,7 @@ require 'nav.php';
 
 <section class="section container admin-layout">
     <form class="form" method="post" enctype="multipart/form-data">
+        <?= csrf_field() ?>
         <h2><?= $edit['id'] ? 'Редактирование проекта' : 'Новый проект' ?></h2>
         <input type="hidden" name="id" value="<?= $edit['id'] ?>">
         <input type="hidden" name="old_image" value="<?= e($edit['image']) ?>">
@@ -72,6 +73,7 @@ require 'nav.php';
                 <td class="table__actions">
                     <a href="?edit=<?= $project['id'] ?>">Изменить</a>
                     <form method="post" data-confirm="Удалить проект из портфолио?">
+                        <?= csrf_field() ?>
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="id" value="<?= $project['id'] ?>">
                         <button class="link-button link-button--danger">Удалить</button>

@@ -17,13 +17,15 @@ $menu = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($title) ?> — <?= SITE_NAME ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css?v=<?= filemtime(__DIR__ . '/../assets/css/style.css') ?>">
 </head>
 <body>
 <header class="header">
     <div class="container header__inner">
-        <a class="logo" href="<?= BASE_URL ?>index.php"><?= SITE_NAME ?><span class="logo__dot"></span></a>
+        <a class="logo" href="<?= BASE_URL ?>index.php"><?= SITE_NAME ?><small>ландшафтный дизайн</small></a>
+
+        <a class="header__phone" href="tel:+73912001010">+7 (391) 200-10-10</a>
 
         <button class="burger" type="button">Меню</button>
 
@@ -45,7 +47,7 @@ $menu = [
                 <a href="<?= BASE_URL ?>logout.php">Выйти</a>
             <?php else: ?>
                 <a href="<?= BASE_URL ?>login.php">Войти</a>
-                <a href="<?= BASE_URL ?>register.php" class="btn btn--small btn--dark">Регистрация</a>
+                <a href="<?= BASE_URL ?>register.php" class="btn btn--small">Регистрация</a>
             <?php endif; ?>
         </nav>
     </div>

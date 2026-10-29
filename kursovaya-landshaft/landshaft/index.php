@@ -4,93 +4,78 @@ require_once 'includes/functions.php';
 $title    = 'Главная';
 $services = db()->query('SELECT * FROM services ORDER BY id LIMIT 3')->fetchAll();
 $projects = db()->query('SELECT * FROM projects ORDER BY year DESC, id DESC LIMIT 3')->fetchAll();
-$stats    = [
-    'проектов' => db()->query('SELECT COUNT(*) FROM projects')->fetchColumn(),
-    'услуг'    => db()->query('SELECT COUNT(*) FROM services')->fetchColumn(),
-    'лет'      => date('Y') - 2015,
-];
+$count    = db()->query('SELECT COUNT(*) FROM projects')->fetchColumn();
 
 require 'includes/header.php';
 ?>
 
-<section class="container hero">
-    <div class="hero__text">
-        <span class="eyebrow eyebrow--light">Студия ландшафтного дизайна · Красноярск</span>
-        <h1>Создаём <em>сады,</em> в&nbsp;которых хочется жить</h1>
-        <p>Проектирование, озеленение и благоустройство частных участков. От идеи до первого урожая.</p>
-        <div class="hero__buttons">
-            <a class="btn btn--accent" href="services.php">Выбрать услугу</a>
-            <a class="btn btn--ghost" href="portfolio.php">Портфолио</a>
+<section class="hero">
+    <div class="container hero__inner">
+        <div class="hero__text">
+            <h1>Ландшафтный дизайн и благоустройство участков в Красноярске</h1>
+            <p>Разрабатываем проект сада, сажаем растения, делаем дорожки, газоны и водоёмы. Работаем с частными домами и дачами с 2015 года.</p>
+            <div class="hero__buttons">
+                <a class="btn" href="services.php">Услуги и цены</a>
+                <a class="btn btn--outline" href="portfolio.php">Наши работы</a>
+            </div>
+            <p class="hero__note">Выезд на участок и консультация — бесплатно. В портфолио <?= $count ?> проектов.</p>
         </div>
-        <div class="hero__stats">
-            <?php foreach ($stats as $label => $value): ?>
-                <div><strong data-count="<?= $value ?>"><?= $value ?></strong><span><?= $label ?></span></div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-    <div class="hero__media" style="background-image: url('<?= BASE_URL ?>assets/img/hero.svg')"></div>
-</section>
-
-<section class="section container">
-    <div class="section-head">
-        <span class="eyebrow">Почему мы</span>
-        <h2>Делаем сад под ваш участок, климат и образ жизни</h2>
-    </div>
-    <div class="bento">
-        <div class="tile"><span class="tile__num">01</span><h3>Растения для Сибири</h3><p>Подбираем только зимостойкие сорта, которые переживут морозы.</p></div>
-        <div class="tile"><span class="tile__num">02</span><h3>Проект до мелочей</h3><p>Генплан, дендроплан и 3D-модель — видите сад до начала работ.</p></div>
-        <div class="tile"><span class="tile__num">03</span><h3>Один договор</h3><p>Проектируем, строим и ухаживаем сами, без субподрядчиков.</p></div>
-        <div class="tile"><span class="tile__num">04</span><h3>Гарантия 2 года</h3><p>Бесплатно заменим растение, если оно не прижилось.</p></div>
+        <img class="hero__img" src="<?= BASE_URL ?>assets/img/hero.svg" alt="Сад с дорожкой">
     </div>
 </section>
 
 <section class="section container">
-    <div class="section-head section-head--row">
-        <div>
-            <span class="eyebrow">Услуги</span>
-            <h2>Популярные услуги</h2>
-        </div>
-        <a class="link-arrow" href="services.php">Все услуги</a>
-    </div>
-    <div class="grid">
-        <?php foreach ($services as $service) require 'includes/service_card.php'; ?>
+    <h2>Почему выбирают нас</h2>
+    <div class="features">
+        <div class="feature"><h3>Растения для Сибири</h3><p>Подбираем только зимостойкие сорта, которые переживут морозы.</p></div>
+        <div class="feature"><h3>Подробный проект</h3><p>Генплан, дендроплан и 3D-модель — вы видите сад до начала работ.</p></div>
+        <div class="feature"><h3>Без субподрядчиков</h3><p>Проектируем, строим и ухаживаем за садом своей командой.</p></div>
+        <div class="feature"><h3>Гарантия 2 года</h3><p>Бесплатно заменим растение, если оно не прижилось.</p></div>
     </div>
 </section>
 
-<section class="section section--dark">
+<section class="section section--light">
     <div class="container">
-        <div class="section-head">
-            <span class="eyebrow eyebrow--light">Процесс</span>
-            <h2>Как мы работаем</h2>
+        <div class="section__head">
+            <h2>Популярные услуги</h2>
+            <a href="services.php">Все услуги</a>
         </div>
-        <ol class="steps">
-            <li><strong>Заявка</strong>Оставляете заказ на сайте или звоните нам</li>
-            <li><strong>Выезд</strong>Специалист осматривает участок и делает замеры</li>
-            <li><strong>Проект</strong>Согласовываем план, смету и сроки</li>
-            <li><strong>Реализация</strong>Создаём сад и передаём его вам с рекомендациями</li>
-        </ol>
+        <div class="grid">
+            <?php foreach ($services as $service) require 'includes/service_card.php'; ?>
+        </div>
     </div>
 </section>
 
 <section class="section container">
-    <div class="section-head section-head--row">
-        <div>
-            <span class="eyebrow">Портфолио</span>
-            <h2>Последние работы</h2>
+    <h2>Как мы работаем</h2>
+    <ol class="steps">
+        <li><strong>Заявка.</strong> Оставляете заказ на сайте или звоните нам.</li>
+        <li><strong>Выезд.</strong> Специалист осматривает участок и делает замеры.</li>
+        <li><strong>Проект.</strong> Согласовываем план, смету и сроки.</li>
+        <li><strong>Реализация.</strong> Создаём сад и передаём его вам с рекомендациями по уходу.</li>
+    </ol>
+</section>
+
+<section class="section section--light">
+    <div class="container">
+        <div class="section__head">
+            <h2>Наши работы</h2>
+            <a href="portfolio.php">Всё портфолио</a>
         </div>
-        <a class="link-arrow" href="portfolio.php">Все проекты</a>
-    </div>
-    <div class="grid">
-        <?php foreach ($projects as $project) require 'includes/project_card.php'; ?>
+        <div class="grid">
+            <?php foreach ($projects as $project) require 'includes/project_card.php'; ?>
+        </div>
     </div>
 </section>
 
-<section class="container cta">
-    <div>
-        <span class="eyebrow">Консультация</span>
-        <h2>Расскажите о своём участке — перезвоним и бесплатно проконсультируем</h2>
+<section class="section container">
+    <div class="cta">
+        <div>
+            <h2>Нужна консультация?</h2>
+            <p>Позвоните по телефону +7 (391) 200-10-10 или оставьте заявку — перезвоним в течение рабочего дня.</p>
+        </div>
+        <a class="btn" href="contacts.php">Оставить заявку</a>
     </div>
-    <a class="btn btn--dark btn--big" href="contacts.php">Получить консультацию</a>
 </section>
 
 <?php require 'includes/footer.php'; ?>

@@ -74,6 +74,7 @@ img { max-width: 100%; display: block; }
 .nav { flex: 1; display: flex; align-items: center; justify-content: space-between; margin-left: 56px; }
 .nav__menu, .nav__actions { display: flex; align-items: center; gap: 28px; }
 .nav__actions { gap: 20px; }
+.nav__indicator { display: none; }
 .nav a:not(.btn) { color: var(--text); text-decoration: none; background: linear-gradient(var(--green), var(--green)) no-repeat left bottom / 0 2px; padding-bottom: 2px; transition: background-size .25s, color .2s; }
 .nav a:not(.btn):hover, .nav a.active { color: var(--green); background-size: 100% 2px; }
 .burger { display: none; margin-left: auto; background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; font: 1rem var(--font-text); cursor: pointer; }
@@ -220,7 +221,9 @@ img { max-width: 100%; display: block; }
     .nav__dash { display: block; flex: 0 0 auto; width: 16px; height: 4px; border-radius: 2px; background: #d9cfc4; transition: width .2s, background-color .2s; }
     .nav__menu a:hover .nav__dash { background: var(--clay); }
     .nav__menu a.active { color: var(--green) !important; }
-    .nav__menu a.active .nav__dash { width: 26px; background: var(--green); view-transition-name: nav-active; }
+    .nav__indicator { display: block; position: absolute; right: 16px; top: 0; width: 26px; height: 4px; border-radius: 2px; background: var(--green); opacity: 0; pointer-events: none; }
+    .nav__indicator.visible { opacity: 1; }
+    .nav__indicator.animated { transition: top .4s cubic-bezier(.3, .7, .2, 1), opacity .2s; }
     .nav__menu span { max-width: 0; opacity: 0; overflow: hidden; transition: max-width .3s, opacity .2s; }
     .nav__menu:hover span, .nav__menu:focus-within span { max-width: 220px; opacity: 1; }
 }
@@ -234,7 +237,6 @@ img { max-width: 100%; display: block; }
     ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
     ::view-transition-old(page) { animation: page-out .25s ease both; }
     ::view-transition-new(page) { animation: page-in .4s ease both; }
-    ::view-transition-group(nav-active) { animation-duration: .45s; animation-timing-function: cubic-bezier(.3, .7, .2, 1); }
 }
 
 @keyframes fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }

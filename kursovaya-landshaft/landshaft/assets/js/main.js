@@ -66,3 +66,28 @@ if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'Int
             observer.observe(element);
         });
 }
+
+const indicator = document.querySelector('.nav__indicator');
+const wide = window.matchMedia('(min-width: 901px)');
+
+function moveIndicator(link) {
+    indicator.style.top = (link.offsetTop + link.offsetHeight / 2 - 2) + 'px';
+    indicator.classList.add('visible');
+}
+
+if (indicator) {
+    const active = document.querySelector('.nav__menu a.active');
+    if (active) moveIndicator(active);
+    requestAnimationFrame(() => requestAnimationFrame(() => indicator.classList.add('animated')));
+
+    document.querySelectorAll('.nav__menu a').forEach(link => {
+        link.addEventListener('click', event => {
+            if (!wide.matches || link.classList.contains('active') || event.ctrlKey || event.metaKey) return;
+            event.preventDefault();
+            document.querySelectorAll('.nav__menu a').forEach(item => item.classList.toggle('active', item === link));
+            moveIndicator(link);
+            const calmMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            setTimeout(() => { window.location.href = link.href; }, calmMotion ? 0 : 420);
+        });
+    });
+}

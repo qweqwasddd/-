@@ -36,6 +36,7 @@ $menu = [
                 <?php if (is_admin()): ?>
                     <a href="<?= BASE_URL ?>admin/index.php" class="<?= $inAdmin ? 'active' : '' ?>"><span>Админ-панель</span><i class="nav__dash"></i></a>
                 <?php endif; ?>
+                <i class="nav__indicator"></i>
             </div>
 
             <div class="nav__actions">

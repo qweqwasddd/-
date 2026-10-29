@@ -76,14 +76,24 @@ function moveIndicator(link) {
 }
 
 if (indicator) {
-    const active = document.querySelector('.nav__menu a.active');
-    if (active) moveIndicator(active);
+    let current = document.querySelector('.nav__menu a.active');
+    if (current) moveIndicator(current);
     requestAnimationFrame(() => requestAnimationFrame(() => indicator.classList.add('animated')));
 
+    const menu = document.querySelector('.nav__menu');
+    menu.addEventListener('mouseleave', () => {
+        if (current) moveIndicator(current);
+        else indicator.classList.remove('visible');
+    });
+
     document.querySelectorAll('.nav__menu a').forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            if (wide.matches) moveIndicator(link);
+        });
         link.addEventListener('click', event => {
-            if (!wide.matches || link.classList.contains('active') || event.ctrlKey || event.metaKey) return;
+            if (!wide.matches || link === current || event.ctrlKey || event.metaKey) return;
             event.preventDefault();
+            current = link;
             document.querySelectorAll('.nav__menu a').forEach(item => item.classList.toggle('active', item === link));
             moveIndicator(link);
             const calmMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

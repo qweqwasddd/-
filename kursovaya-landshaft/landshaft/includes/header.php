@@ -29,6 +29,7 @@ $menu = [
 
         <nav class="nav">
             <div class="nav__menu">
+                <span class="nav__caption">Разделы</span>
                 <?php foreach ($menu as $file => $label): ?>
                     <a href="<?= BASE_URL . $file ?>"
                        class="<?= !$inAdmin && $current === $file ? 'active' : '' ?>"><span><?= $label ?></span><i class="nav__dash"></i></a>

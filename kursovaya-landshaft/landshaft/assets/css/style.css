@@ -217,12 +217,24 @@ img { max-width: 100%; display: block; }
     }
     .nav__menu:hover, .nav__menu:focus-within { background-color: #fff; border-color: var(--line); box-shadow: var(--shadow); }
     .nav__menu a { display: flex; align-items: center; justify-content: flex-end; gap: 18px; padding: 9px 6px !important; background-image: none !important; color: var(--muted) !important; white-space: nowrap; }
-    .nav__menu a::after { content: ''; flex: 0 0 auto; width: 16px; height: 4px; border-radius: 2px; background: #d9cfc4; transition: width .2s, background-color .2s; }
-    .nav__menu a:hover::after { background: var(--clay); }
+    .nav__dash { display: block; flex: 0 0 auto; width: 16px; height: 4px; border-radius: 2px; background: #d9cfc4; transition: width .2s, background-color .2s; }
+    .nav__menu a:hover .nav__dash { background: var(--clay); }
     .nav__menu a.active { color: var(--green) !important; }
-    .nav__menu a.active::after { width: 26px; background: var(--green); }
+    .nav__menu a.active .nav__dash { width: 26px; background: var(--green); view-transition-name: nav-active; }
     .nav__menu span { max-width: 0; opacity: 0; overflow: hidden; transition: max-width .3s, opacity .2s; }
     .nav__menu:hover span, .nav__menu:focus-within span { max-width: 220px; opacity: 1; }
+}
+
+@keyframes page-out { to { opacity: 0; transform: translateY(-14px); } }
+@keyframes page-in { from { opacity: 0; transform: translateY(18px); } }
+
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition { navigation: auto; }
+    main { view-transition-name: page; }
+    ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+    ::view-transition-old(page) { animation: page-out .25s ease both; }
+    ::view-transition-new(page) { animation: page-in .4s ease both; }
+    ::view-transition-group(nav-active) { animation-duration: .45s; animation-timing-function: cubic-bezier(.3, .7, .2, 1); }
 }
 
 @keyframes fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }

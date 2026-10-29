@@ -31,10 +31,10 @@ $menu = [
             <div class="nav__menu">
                 <?php foreach ($menu as $file => $label): ?>
                     <a href="<?= BASE_URL . $file ?>"
-                       class="<?= !$inAdmin && $current === $file ? 'active' : '' ?>"><span><?= $label ?></span></a>
+                       class="<?= !$inAdmin && $current === $file ? 'active' : '' ?>"><span><?= $label ?></span><i class="nav__dash"></i></a>
                 <?php endforeach; ?>
                 <?php if (is_admin()): ?>
-                    <a href="<?= BASE_URL ?>admin/index.php" class="<?= $inAdmin ? 'active' : '' ?>"><span>Админ-панель</span></a>
+                    <a href="<?= BASE_URL ?>admin/index.php" class="<?= $inAdmin ? 'active' : '' ?>"><span>Админ-панель</span><i class="nav__dash"></i></a>
                 <?php endif; ?>
             </div>
 

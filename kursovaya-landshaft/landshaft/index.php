@@ -9,7 +9,6 @@ $stats    = [
     'услуг'    => db()->query('SELECT COUNT(*) FROM services')->fetchColumn(),
     'лет'      => date('Y') - 2015,
 ];
-$ticker = ['Проектирование', 'Озеленение', 'Газоны', 'Садовые дорожки', 'Водоёмы', 'Освещение', 'Уход за садом'];
 
 require 'includes/header.php';
 ?>
@@ -29,26 +28,8 @@ require 'includes/header.php';
             <?php endforeach; ?>
         </div>
     </div>
-    <div class="hero__media" style="background-image: url('<?= BASE_URL ?>assets/img/hero.svg')">
-        <div class="badge">
-            <svg viewBox="0 0 200 200">
-                <defs><path id="circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
-                <text><textPath href="#circle">сады под ключ · с 2015 года · гарантия 2 года ·</textPath></text>
-            </svg>
-            <span>✿</span>
-        </div>
-    </div>
+    <div class="hero__media" style="background-image: url('<?= BASE_URL ?>assets/img/hero.svg')"></div>
 </section>
-
-<div class="ticker-wrap">
-    <div class="ticker">
-        <div class="ticker__track">
-            <?php for ($i = 0; $i < 2; $i++): ?>
-                <?php foreach ($ticker as $word): ?><span><?= $word ?></span><?php endforeach; ?>
-            <?php endfor; ?>
-        </div>
-    </div>
-</div>
 
 <section class="section container">
     <div class="section-head">
@@ -56,10 +37,10 @@ require 'includes/header.php';
         <h2>Делаем сад под ваш участок, климат и образ жизни</h2>
     </div>
     <div class="bento">
-        <div class="tile tile--forest"><span class="tile__num">01</span><h3>Растения для Сибири</h3><p>Подбираем только зимостойкие сорта, которые переживут морозы.</p></div>
-        <div class="tile tile--lime"><span class="tile__num">02</span><h3>Проект до мелочей</h3><p>Генплан, дендроплан и 3D-модель — видите сад до начала работ.</p></div>
-        <div class="tile tile--peach"><span class="tile__num">03</span><h3>Один договор</h3><p>Проектируем, строим и ухаживаем сами, без субподрядчиков.</p></div>
-        <div class="tile tile--white"><span class="tile__num">04</span><h3>Гарантия 2 года</h3><p>Бесплатно заменим растение, если оно не прижилось.</p></div>
+        <div class="tile"><span class="tile__num">01</span><h3>Растения для Сибири</h3><p>Подбираем только зимостойкие сорта, которые переживут морозы.</p></div>
+        <div class="tile"><span class="tile__num">02</span><h3>Проект до мелочей</h3><p>Генплан, дендроплан и 3D-модель — видите сад до начала работ.</p></div>
+        <div class="tile"><span class="tile__num">03</span><h3>Один договор</h3><p>Проектируем, строим и ухаживаем сами, без субподрядчиков.</p></div>
+        <div class="tile"><span class="tile__num">04</span><h3>Гарантия 2 года</h3><p>Бесплатно заменим растение, если оно не прижилось.</p></div>
     </div>
 </section>
 
@@ -99,7 +80,7 @@ require 'includes/header.php';
         </div>
         <a class="link-arrow" href="portfolio.php">Все проекты</a>
     </div>
-    <div class="gallery">
+    <div class="grid">
         <?php foreach ($projects as $project) require 'includes/project_card.php'; ?>
     </div>
 </section>
